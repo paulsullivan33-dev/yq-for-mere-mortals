@@ -1,0 +1,17 @@
+# Two clubhouse displays share most of their
+# settings, so the shared block is written once,
+# given an anchor name, and merged into each
+# display with an alias.
+defaults: &display_defaults
+  brightness: 70
+  volume: 20
+  sleep_minutes: 10
+
+lobby_display:
+  <<: *display_defaults
+  name: Lobby
+
+hall_display:
+  <<: *display_defaults
+  name: Hall
+  brightness: 85

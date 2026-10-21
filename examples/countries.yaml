@@ -1,0 +1,11 @@
+# Handball league groups, by ISO 3166-1 alpha-2
+# country code. Group B's first code is quoted in
+# the source file; group A's is not.
+group_a:
+  - NO
+  - SE
+  - DK
+group_b:
+  - "NO"
+  - FR
+  - DE

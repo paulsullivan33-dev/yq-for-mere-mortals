@@ -1,0 +1,18 @@
+# CI workflow for the Fieldnotes app, in the shape
+# GitHub Actions uses. It is only a fixture here —
+# nothing in this guide runs it.
+name: build-and-test
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the tests
+        run: make test

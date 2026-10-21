@@ -1,0 +1,23 @@
+# Fieldnotes stack — a small note-taking app.
+# Start everything with: docker compose up
+services:
+  web:
+    image: fieldnotes/web:1.4.2 # bump the tag when a release lands
+    ports:
+      - "8080:80"
+    environment:
+      - APP_ENV=production
+      - APP_PORT=80
+    depends_on:
+      - db
+    restart: unless-stopped
+  db:
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: fieldnotes
+      POSTGRES_USER: notes
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

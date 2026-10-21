@@ -1,0 +1,21 @@
+# Fieldnotes application settings.
+server:
+  host: 0.0.0.0
+  port: 8080
+  tls: false
+features:
+  signup: on
+  comments: yes
+  beta_dashboard: off
+logging:
+  level: info
+  file: /var/log/fieldnotes.log
+limits:
+  max_upload_mb: 25
+  retries: 3
+tags:
+  - notes
+  - web
+  - club
+  - web
+  - api

@@ -1,0 +1,15 @@
+# Document 1: shared settings for the clubhouse kiosk.
+kind: Settings
+metadata:
+  name: kiosk-settings
+data:
+  theme: light
+  timeout_seconds: 300
+---
+# Document 2: the kiosk service itself.
+kind: Service
+metadata:
+  name: kiosk
+spec:
+  port: 9000
+  replicas: 2

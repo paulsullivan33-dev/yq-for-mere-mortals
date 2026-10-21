@@ -1,0 +1,79 @@
+# yq for Mere Mortals — command cheatsheet.
+# Every command below is run in the guide, against
+# the fixtures in this directory, with Go yq v4.54.1.
+
+# Which yq is this? (chapter 1)
+yq --version
+
+# Identity: parse and re-print (chapter 1)
+yq '.' compose.yaml
+
+# Reading (chapter 2)
+yq '.services.web.image' compose.yaml
+yq '.services.db' compose.yaml
+yq '.services.web.ports[0]' compose.yaml
+yq '.services.web.environment[]' compose.yaml
+yq '.services.web.environment[0:1]' compose.yaml
+yq '.services[] | .image' compose.yaml
+yq '.services | keys' compose.yaml
+yq '.services | length' compose.yaml
+yq '.kind' multi.yaml
+yq 'filename' compose.yaml
+
+# Filters and operators (chapter 3)
+yq '.services | to_entries | .[] | select(.value.restart == "unless-stopped") | .key' compose.yaml
+yq '.tags | map(upcase)' settings.yaml
+yq '.tags | sort' settings.yaml
+yq '.tags | unique' settings.yaml
+yq '.limits | with_entries(.value = .value * 2)' settings.yaml
+yq '.services.web.image | split(":")' compose.yaml
+yq '.services.web.image | sub("1.4.2"; "1.5.0")' compose.yaml
+yq '.. | select(tag == "!!map") | select(has("image")) | .image' compose.yaml
+yq '.services.web.image | path' compose.yaml
+
+# Changing YAML — copy first, preview, edit, diff (chapter 4)
+cp compose.yaml before.yaml
+yq -i '.services.web.image = "fieldnotes/web:1.5.0"' work.yaml
+diff before.yaml work.yaml
+yq -i '.services.web.environment += ["APP_DEBUG=false"]' work.yaml
+yq -i '.services.web.ports += ["8443:443"]' work.yaml
+yq -i 'del(.services.db.environment.POSTGRES_USER)' work.yaml
+yq -i '.limits.retries |= . + 1' limits.yaml
+
+# Comments survive yq; a JSON round trip removes them (chapter 5)
+yq -o=json '.' compose.yaml > compose.json
+yq -p=json -o=yaml '.' compose.json > roundtrip.yaml
+
+# Converting formats (chapter 6)
+yq -o=json '.services.web' compose.yaml
+yq -o=json '.services.web' compose.yaml | jq '{image, ports, restart}'
+yq -p=json -o=yaml '.' data.json
+yq -p=props -o=yaml '.' app.properties
+yq -o=props '.' settings.yaml
+yq -p=xml -o=yaml '.' settings.xml
+yq -p=xml -o=xml '.' settings.xml
+
+# Multiple documents (chapter 7)
+yq 'document_index' multi.yaml
+yq 'select(document_index == 1)' multi.yaml
+# DANGER with -i: the expression above, used with -i,
+# writes back only the selected document. The safe
+# form selects inside the assignment's path:
+yq -i '(. | select(document_index == 1) | .spec.replicas) = 3' fixed.yaml
+yq --split-exp '.metadata.name' '.' multi.yaml
+
+# Type traps (chapter 8)
+yq 'keys' workflow.yaml
+yq '.on.push.branches' workflow.yaml
+yq '.features.signup | tag' settings.yaml
+yq '.group_a[0] | tag' countries.yaml
+
+# Anchors and aliases (chapter 9)
+yq '.hall_display' anchors.yaml
+yq '.lobby_display.brightness' anchors.yaml
+yq -i '.defaults.brightness = 90' a1.yaml
+yq --yaml-fix-merge-anchor-to-spec '.hall_display.brightness' anchors.yaml
+
+# Debugging (chapter 11)
+yq '.services | has("web")' compose.yaml
+yq '.services.web.missing // "not set"' compose.yaml

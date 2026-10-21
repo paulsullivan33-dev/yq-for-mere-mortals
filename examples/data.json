@@ -1,0 +1,1 @@
+{"app":"fieldnotes","version":"1.4.2","ports":[8080,5432],"features":{"signup":true,"comments":false},"maintainers":[{"name":"R. Okafor","role":"lead"},{"name":"J. Lindqvist","role":"docs"}]}

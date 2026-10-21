@@ -1,0 +1,9 @@
+<settings>
+  <server>
+    <host>0.0.0.0</host>
+    <port>8080</port>
+  </server>
+  <logging>
+    <level>info</level>
+  </logging>
+</settings>

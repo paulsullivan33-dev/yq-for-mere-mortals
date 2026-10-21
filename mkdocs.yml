@@ -1,0 +1,24 @@
+site_name: yq for Mere Mortals
+site_description: Plain-language yq (the Go one, version 4). Reading, filtering, editing, and converting YAML from the command line, with every command run for real against the sample files.
+site_url: https://paulsullivan33-dev.github.io/yq-for-mere-mortals/
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What yq Is: what-yq-is.md
+  - Reading YAML: reading-yaml.md
+  - Filters and Operators: filters-and-operators.md
+  - Changing YAML: changing-yaml.md
+  - Comments and Round Trips: comments-and-round-trips.md
+  - Converting Formats: converting-formats.md
+  - Multiple Documents: multiple-documents.md
+  - YAML Type Traps: yaml-type-traps.md
+  - Anchors and Aliases: anchors-and-aliases.md
+  - A Worked Example: worked-example.md
+  - Errors and Debugging: errors-and-debugging.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md
