@@ -113,3 +113,19 @@ edit until you trust it, and check any value you
 are about to rely on with `tag` before you rely
 on it: in YAML, what a word *is* depends on who
 is reading it.
+
+---
+
+## Part of the series
+
+This guide is one of the [For Mere Mortals](https://paulsullivan33-dev.github.io/mere-mortals/) guides: plain-language guides to the tools programmers and makers use.
+
+Related guides:
+
+- [jq for Mere Mortals](https://paulsullivan33-dev.github.io/jq-for-mere-mortals/)
+- [YAML for Mere Mortals](https://paulsullivan33-dev.github.io/yaml-for-mere-mortals/)
+- [Kubernetes for Mere Mortals](https://paulsullivan33-dev.github.io/kubernetes-for-mere-mortals/)
+
+## License
+
+The writing in this guide is licensed under [CC BY 4.0](https://github.com/paulsullivan33-dev/yq-for-mere-mortals/blob/main/LICENSE). Code examples and lab scripts are licensed under the [MIT License](https://github.com/paulsullivan33-dev/yq-for-mere-mortals/blob/main/LICENSE-CODE).
